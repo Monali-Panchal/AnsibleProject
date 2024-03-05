@@ -4,11 +4,18 @@
   become_method: sudo
   become_user: root
 
+  vars:
+     repo_url: https://github.com/Monali-Panchal/AnsibleProject.git
+     repo_dest: /home/ubuntu/repos/
+     build_path: /home/ubuntu/repos
+     destination_path: /var/www/html/index.html
+     src_build_path: /home/ubuntu/repos/build/index.html
+
   tasks:
     - name: Clone a github repository
       git:
-        repo: https://github.com/Monali-Panchal/AnsibleProject.git
-        dest: /home/debian/repos/
+        repo: "{{repo_url}}"
+        dest: "{{repo_dest}}"
         version: master
         clone: yes
         update: yes
@@ -21,20 +28,18 @@
       loop:
         - apache2
         - npm
-
     - name: Install dependencies
       npm:
-        path: /home/ubuntu/repos
-
-    - name: Build app
+        path: "{{build_path}}"
+    - name: Build application
       command: npm run build
       args:
-        chdir: /home/ubuntu/repos
+        chdir: "{{build_path}}"
 
     - name: copying the index.html to remote Server
       copy:
-        src: /home/ubuntu/repos/build/index.html
-        dest: /var/www/html/index.html
+        src: "{{src_build_path}}"
+        dest: "{{destination_path}}"
         remote_src: yes
         owner: root
         group: root
