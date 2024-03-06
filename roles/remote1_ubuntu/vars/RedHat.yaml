@@ -1,0 +1,5 @@
+repo_url: https://github.com/Monali-Panchal/AnsibleProject.git
+destination_path: /var/www/html/index.html
+repo_dest: /home/ec2-user/repos/
+build_path: /home/ec2-user/repos
+src_build_path: /home/ec2-user/repos/build/index.html
