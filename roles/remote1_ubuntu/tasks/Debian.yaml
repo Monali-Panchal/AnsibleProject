@@ -15,11 +15,11 @@
       loop:
         - apache2
         - npm
-    - name: Install dependencies
-      npm:
-        path: "{{build_path}}"
-    - name: Build application
-      command: npm run build
+
+    - name: Install dependencies and building the project on Ubuntu
+      ansible.builtin.shell: |
+        npm install
+        npm run build
       args:
         chdir: "{{build_path}}"
 
