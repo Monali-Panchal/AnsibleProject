@@ -2,6 +2,7 @@
       git:
         repo: "{{repo_url}}"
         dest: "{{repo_dest}}"
+        force: yes
         version: master
         clone: yes
         update: yes
