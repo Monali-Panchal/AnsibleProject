@@ -8,13 +8,14 @@
         update: yes
 
     - name: Install the Required packages
-      apt:
+      yum:
         name: "{{item}}"
         state: present
         update_cache: yes
       loop:
         - apache2
         - npm
+        - git
     - name: Install dependencies
       npm:
         path: "{{build_path}}"
