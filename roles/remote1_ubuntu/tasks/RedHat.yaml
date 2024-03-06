@@ -18,9 +18,9 @@
 
     - name: update npm global packages
       npm:
-        name: '{{ item }}'
+        name: "{{item}}"
         global: yes
-        version: '6.14.13'
+        version: "6.14.13"
 
     - name: Install dependencies and building
       ansible.builtin.shell: |
