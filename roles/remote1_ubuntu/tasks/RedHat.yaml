@@ -16,9 +16,17 @@
         clone: yes
         update: yes
 
+    - name: update npm global packages
+      npm:
+        name: '{{ item }}'
+        global: yes
+        version: '6.14.13'
+      with_items: '{{ npm_packages }}'
+      tags:
+        - always
+
     - name: Install dependencies and building
       ansible.builtin.shell: |
-        npm install -g npm@6.14.13
         npm install
         npm run build
       args:
