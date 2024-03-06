@@ -6,6 +6,7 @@
       loop:
         - httpd
         - git
+        - python3
 
     - name: Clone a github repository - RedHat
       git:
