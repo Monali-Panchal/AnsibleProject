@@ -8,6 +8,7 @@
         - git
         - python3
         - npm
+        - nodejs
 
     - name: Clone a github repository - RedHat
       git:
