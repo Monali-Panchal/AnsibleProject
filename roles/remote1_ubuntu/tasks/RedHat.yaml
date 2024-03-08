@@ -28,14 +28,14 @@
     - name: Install dependencies using npm
       command: /usr/bin/npm install
       args:
-        chdir: 
+        chdir: "{{build_path}}"
       environment:
         HOME: /root
 
     - name: Run npm build
       command: /usr/bin/npm run build
       args:
-        chdir: 
+        chdir: "{{build_path}}"
       environment:
         HOME: /root
 
