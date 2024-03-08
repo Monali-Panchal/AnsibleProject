@@ -18,22 +18,28 @@
         clone: yes
         update: yes
 
-    - name: Install npm on RedHat remote machine
+    - name: Install Node.js 16.x.x
       yum:
-        name: npm
-        state: latest
+        name: nodejs
+        state: present
+        enablerepo: nodesource
         update_cache: yes
-      when: ansible_distribution == "RedHat"
+
+    - name: Install npm with specific version
+      npm:
+        name: npm
+        global: yes
+        version: "8.5.1"
 
     - name: Install dependencies using npm
-      command: /usr/bin/npm install
+      command: npm install
       args:
         chdir: ~/reactjs-demo
       environment:
         HOME: /root
 
     - name: Run npm build
-      command: /usr/bin/npm run build
+      command: npm run build
       args:
         chdir: ~/reactjs-demo
       environment:
