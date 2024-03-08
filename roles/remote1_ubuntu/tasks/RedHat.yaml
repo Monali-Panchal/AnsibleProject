@@ -18,32 +18,19 @@
         clone: yes
         update: yes
 
-    - name: Install Node.js 16.x.x
-      yum:
-        name: nodejs
-        state: present
-        enablerepo: nodesource
-        update_cache: yes
-
-    - name: Install npm with specific version
-      npm:
-        name: npm
-        global: yes
-        version: "8.5.1"
-
-    - name: Install dependencies using npm
-      command: npm install
+    # Install project dependencies with npm
+    - name: Install project dependencies with npm
+      command: /usr/bin/npm install
       args:
         chdir: ~/reactjs-demo
-      environment:
-        HOME: /root
 
-    - name: Run npm build
-      command: npm run build
+    # Run npm build on RedHat
+    - name: Run npm build on RedHat
+      command: /usr/bin/npm run build
       args:
         chdir: ~/reactjs-demo
-      environment:
-        HOME: /root
+      ignore_errors: true
+
 
     - name: copying the index.html to remote Server -RedHat
       copy:
@@ -53,3 +40,11 @@
         owner: root
         group: root
       notify: Restart Apache
+
+    # Set file permissions for Apache on RedHat
+    - name: Set file permissions for Apache on RedHat
+      file:
+        path: /var/www/html
+        owner: apache
+        group: apache
+        mode: "0755"
