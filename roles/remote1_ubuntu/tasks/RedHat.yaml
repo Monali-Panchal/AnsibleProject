@@ -7,7 +7,6 @@
         - httpd
         - git
         - python3
-        - npm
         - nodejs
 
     - name: Clone a github repository - RedHat
@@ -19,12 +18,26 @@
         clone: yes
         update: yes
 
-    - name: Install dependencies and building
-      ansible.builtin.shell: |
-        npm install
-        npm run build
+    - name: Install npm on RedHat remote machine
+      yum:
+        name: npm
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == "RedHat"
+
+    - name: Install dependencies using npm
+      command: /usr/bin/npm install
       args:
-        chdir: "{{build_path}}"
+        chdir: 
+      environment:
+        HOME: /root
+
+    - name: Run npm build
+      command: /usr/bin/npm run build
+      args:
+        chdir: 
+      environment:
+        HOME: /root
 
     - name: copying the index.html to remote Server -RedHat
       copy:
