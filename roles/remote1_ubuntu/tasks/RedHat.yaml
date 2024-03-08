@@ -8,13 +8,14 @@
         - git
         - python3
         - nodejs
+        - npm
 
     - name: Clone a github repository - RedHat
       git:
         repo: "{{repo_url}}"
         dest: ~/reactjs-demo
         force: yes
-        version: master
+        version: main
         clone: yes
         update: yes
 
