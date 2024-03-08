@@ -32,6 +32,13 @@
         chdir: ~/reactjs-demo
       ignore_errors: true
 
+    # Set file permissions for Apache on RedHat
+    - name: Set file permissions for Apache on RedHat
+      file:
+        path: /var/www/html
+        owner: apache
+        group: apache
+        mode: "0755"
 
     - name: copying the index.html to remote Server -RedHat
       copy:
@@ -42,10 +49,3 @@
         group: root
       notify: Restart Apache
 
-    # Set file permissions for Apache on RedHat
-    - name: Set file permissions for Apache on RedHat
-      file:
-        path: /var/www/html
-        owner: apache
-        group: apache
-        mode: "0755"
