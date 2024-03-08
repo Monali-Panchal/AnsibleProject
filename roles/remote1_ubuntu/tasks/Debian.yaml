@@ -6,6 +6,8 @@
         version: master
         clone: yes
         update: yes
+      tags:
+        Debain
 
     - name: Install the Required packages
       apt:
@@ -15,6 +17,8 @@
       loop:
         - apache2
         - npm
+      tags:
+        Debain
 
     - name: Install dependencies and building the project on Ubuntu
       ansible.builtin.shell: |
@@ -22,6 +26,8 @@
         npm run build
       args:
         chdir: "{{build_path}}"
+      tags:
+        Debain
 
     - name: copying the index.html to remote Server
       copy:
@@ -31,3 +37,5 @@
         owner: root
         group: root
       notify: Restart Apache
+      tags:
+        Debain
