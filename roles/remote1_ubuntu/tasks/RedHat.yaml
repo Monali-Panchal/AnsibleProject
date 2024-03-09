@@ -40,12 +40,19 @@
         group: apache
         mode: "0755"
 
+    - name: Remove SELinux permissions and set to default for RedHat
+      command: restorecon -Rv /var/www/html
+
     - name: copying the index.html to remote Server -RedHat
       copy:
         src: "{{src_build_path}}"
         dest: "{{destination_path}}"
         remote_src: yes
-        owner: root
-        group: root
-      notify: Restart Apache
+        owner: apache
+        group: apache
+
+    - name: Restart Apache service on RedHat
+      service:
+        name: httpd
+        state: restarted
 
