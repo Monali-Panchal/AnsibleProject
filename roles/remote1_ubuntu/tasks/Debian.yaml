@@ -6,8 +6,6 @@
         version: master
         clone: yes
         update: yes
-      tags:
-        Debain
 
     - name: Install the Required packages
       apt:
@@ -37,5 +35,3 @@
         owner: root
         group: root
       notify: Restart Apache
-      tags:
-        Debain
